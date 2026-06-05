@@ -1,0 +1,41 @@
+{
+  "name": "storewithdb",
+  "version": "1.0.0",
+  "description": "This is the second attempt using prisma",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "tsx --watch ./src/app.ts",
+    "dbgetall": "tsx ./db/getAll.ts",
+    "dbdropall": "tsx ./db/dropAll.ts",
+    "dbInitialize": "tsx ./db/initialize.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MarcielloJumpingFrogg/StoreWithDB.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/MarcielloJumpingFrogg/StoreWithDB/issues"
+  },
+  "homepage": "https://github.com/MarcielloJumpingFrogg/StoreWithDB#readme",
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "ejs": "^6.0.1",
+    "express": "^5.2.1",
+    "open": "^11.0.0",
+    "prisma": "^7.8.0"
+  },
+  "devDependencies": {
+    "@prisma/adapter-better-sqlite3": "^7.8.0",
+    "@prisma/client": "^7.8.0",
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/express": "^5.0.6",
+    "@types/node": "^25.9.1",
+    "tsx": "^4.22.4",
+    "typescript": "^6.0.3"
+  }
+}

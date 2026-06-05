@@ -1,0 +1,32 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Store {
+  id Int @id @default(autoincrement())
+  name String
+  price_cents Int 
+  producer String 
+  amount Int
+  categories Json
+  reviews Review[]
+}
+
+model Review{
+  id Int @id @default(autoincrement())
+  itemReviewd Store @relation(fields: [itemId], references: [id])
+  user String
+  itemId Int
+  starRating Int 
+  fullReview String?
+}

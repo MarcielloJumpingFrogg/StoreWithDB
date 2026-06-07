@@ -192,7 +192,7 @@ export type ReviewGroupByOutputType = {
   user: string
   itemId: number
   starRating: number
-  fullReview: string
+  fullReview: string | null
   _count: ReviewCountAggregateOutputType | null
   _avg: ReviewAvgAggregateOutputType | null
   _sum: ReviewSumAggregateOutputType | null
@@ -223,7 +223,7 @@ export type ReviewWhereInput = {
   user?: Prisma.StringFilter<"Review"> | string
   itemId?: Prisma.IntFilter<"Review"> | number
   starRating?: Prisma.IntFilter<"Review"> | number
-  fullReview?: Prisma.StringFilter<"Review"> | string
+  fullReview?: Prisma.StringNullableFilter<"Review"> | string | null
   itemReviewd?: Prisma.XOR<Prisma.StoreScalarRelationFilter, Prisma.StoreWhereInput>
 }
 
@@ -232,7 +232,7 @@ export type ReviewOrderByWithRelationInput = {
   user?: Prisma.SortOrder
   itemId?: Prisma.SortOrder
   starRating?: Prisma.SortOrder
-  fullReview?: Prisma.SortOrder
+  fullReview?: Prisma.SortOrderInput | Prisma.SortOrder
   itemReviewd?: Prisma.StoreOrderByWithRelationInput
 }
 
@@ -244,7 +244,7 @@ export type ReviewWhereUniqueInput = Prisma.AtLeast<{
   user?: Prisma.StringFilter<"Review"> | string
   itemId?: Prisma.IntFilter<"Review"> | number
   starRating?: Prisma.IntFilter<"Review"> | number
-  fullReview?: Prisma.StringFilter<"Review"> | string
+  fullReview?: Prisma.StringNullableFilter<"Review"> | string | null
   itemReviewd?: Prisma.XOR<Prisma.StoreScalarRelationFilter, Prisma.StoreWhereInput>
 }, "id">
 
@@ -253,7 +253,7 @@ export type ReviewOrderByWithAggregationInput = {
   user?: Prisma.SortOrder
   itemId?: Prisma.SortOrder
   starRating?: Prisma.SortOrder
-  fullReview?: Prisma.SortOrder
+  fullReview?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.ReviewCountOrderByAggregateInput
   _avg?: Prisma.ReviewAvgOrderByAggregateInput
   _max?: Prisma.ReviewMaxOrderByAggregateInput
@@ -269,13 +269,13 @@ export type ReviewScalarWhereWithAggregatesInput = {
   user?: Prisma.StringWithAggregatesFilter<"Review"> | string
   itemId?: Prisma.IntWithAggregatesFilter<"Review"> | number
   starRating?: Prisma.IntWithAggregatesFilter<"Review"> | number
-  fullReview?: Prisma.StringWithAggregatesFilter<"Review"> | string
+  fullReview?: Prisma.StringNullableWithAggregatesFilter<"Review"> | string | null
 }
 
 export type ReviewCreateInput = {
   user: string
   starRating: number
-  fullReview: string
+  fullReview?: string | null
   itemReviewd: Prisma.StoreCreateNestedOneWithoutReviewsInput
 }
 
@@ -284,13 +284,13 @@ export type ReviewUncheckedCreateInput = {
   user: string
   itemId: number
   starRating: number
-  fullReview: string
+  fullReview?: string | null
 }
 
 export type ReviewUpdateInput = {
   user?: Prisma.StringFieldUpdateOperationsInput | string
   starRating?: Prisma.IntFieldUpdateOperationsInput | number
-  fullReview?: Prisma.StringFieldUpdateOperationsInput | string
+  fullReview?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   itemReviewd?: Prisma.StoreUpdateOneRequiredWithoutReviewsNestedInput
 }
 
@@ -299,7 +299,7 @@ export type ReviewUncheckedUpdateInput = {
   user?: Prisma.StringFieldUpdateOperationsInput | string
   itemId?: Prisma.IntFieldUpdateOperationsInput | number
   starRating?: Prisma.IntFieldUpdateOperationsInput | number
-  fullReview?: Prisma.StringFieldUpdateOperationsInput | string
+  fullReview?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ReviewCreateManyInput = {
@@ -307,13 +307,13 @@ export type ReviewCreateManyInput = {
   user: string
   itemId: number
   starRating: number
-  fullReview: string
+  fullReview?: string | null
 }
 
 export type ReviewUpdateManyMutationInput = {
   user?: Prisma.StringFieldUpdateOperationsInput | string
   starRating?: Prisma.IntFieldUpdateOperationsInput | number
-  fullReview?: Prisma.StringFieldUpdateOperationsInput | string
+  fullReview?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ReviewUncheckedUpdateManyInput = {
@@ -321,7 +321,7 @@ export type ReviewUncheckedUpdateManyInput = {
   user?: Prisma.StringFieldUpdateOperationsInput | string
   itemId?: Prisma.IntFieldUpdateOperationsInput | number
   starRating?: Prisma.IntFieldUpdateOperationsInput | number
-  fullReview?: Prisma.StringFieldUpdateOperationsInput | string
+  fullReview?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ReviewListRelationFilter = {
@@ -412,17 +412,21 @@ export type ReviewUncheckedUpdateManyWithoutItemReviewdNestedInput = {
   deleteMany?: Prisma.ReviewScalarWhereInput | Prisma.ReviewScalarWhereInput[]
 }
 
+export type NullableStringFieldUpdateOperationsInput = {
+  set?: string | null
+}
+
 export type ReviewCreateWithoutItemReviewdInput = {
   user: string
   starRating: number
-  fullReview: string
+  fullReview?: string | null
 }
 
 export type ReviewUncheckedCreateWithoutItemReviewdInput = {
   id?: number
   user: string
   starRating: number
-  fullReview: string
+  fullReview?: string | null
 }
 
 export type ReviewCreateOrConnectWithoutItemReviewdInput = {
@@ -432,6 +436,7 @@ export type ReviewCreateOrConnectWithoutItemReviewdInput = {
 
 export type ReviewCreateManyItemReviewdInputEnvelope = {
   data: Prisma.ReviewCreateManyItemReviewdInput | Prisma.ReviewCreateManyItemReviewdInput[]
+  skipDuplicates?: boolean
 }
 
 export type ReviewUpsertWithWhereUniqueWithoutItemReviewdInput = {
@@ -458,34 +463,34 @@ export type ReviewScalarWhereInput = {
   user?: Prisma.StringFilter<"Review"> | string
   itemId?: Prisma.IntFilter<"Review"> | number
   starRating?: Prisma.IntFilter<"Review"> | number
-  fullReview?: Prisma.StringFilter<"Review"> | string
+  fullReview?: Prisma.StringNullableFilter<"Review"> | string | null
 }
 
 export type ReviewCreateManyItemReviewdInput = {
   id?: number
   user: string
   starRating: number
-  fullReview: string
+  fullReview?: string | null
 }
 
 export type ReviewUpdateWithoutItemReviewdInput = {
   user?: Prisma.StringFieldUpdateOperationsInput | string
   starRating?: Prisma.IntFieldUpdateOperationsInput | number
-  fullReview?: Prisma.StringFieldUpdateOperationsInput | string
+  fullReview?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ReviewUncheckedUpdateWithoutItemReviewdInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   user?: Prisma.StringFieldUpdateOperationsInput | string
   starRating?: Prisma.IntFieldUpdateOperationsInput | number
-  fullReview?: Prisma.StringFieldUpdateOperationsInput | string
+  fullReview?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ReviewUncheckedUpdateManyWithoutItemReviewdInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   user?: Prisma.StringFieldUpdateOperationsInput | string
   starRating?: Prisma.IntFieldUpdateOperationsInput | number
-  fullReview?: Prisma.StringFieldUpdateOperationsInput | string
+  fullReview?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -546,7 +551,7 @@ export type $ReviewPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     user: string
     itemId: number
     starRating: number
-    fullReview: string
+    fullReview: string | null
   }, ExtArgs["result"]["review"]>
   composites: {}
 }
@@ -1210,6 +1215,7 @@ export type ReviewCreateManyArgs<ExtArgs extends runtime.Types.Extensions.Intern
    * The data used to create many Reviews.
    */
   data: Prisma.ReviewCreateManyInput | Prisma.ReviewCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -1228,6 +1234,7 @@ export type ReviewCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensio
    * The data used to create many Reviews.
    */
   data: Prisma.ReviewCreateManyInput | Prisma.ReviewCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

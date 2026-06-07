@@ -7,7 +7,7 @@ async function main() {
       price_cents: 10,
       producer: "generic",
       amount: 120,
-      category: ["Silent", "RX cherry"],
+      categories: ["silent", "generic", "rx cherry"],
       reviews: {
         create: {
           user: "Paolo",
@@ -20,7 +20,7 @@ async function main() {
       name: "Kahil clicky green switches",
       price_cents: 20,
       producer: "Kahil",
-      category: "['Clicky', 'RX Cherry']",
+      categories: ["clicky", "kahil", "premium", "rx cherry"],
       amount: 80,
       reviews: {
         create: {

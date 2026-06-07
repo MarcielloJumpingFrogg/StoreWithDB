@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<%- include("./partials/head.ejs", {title: title}) %>
+<html lang="en">
+  <body>
+    <%- include("./partials/navBar.ejs") %>
+    <h1>Home Page</h1>
+    <div class="articles">
+      <% for(let i = 0; i < articleList.length; i++) { %>
+        <div class="item">
+          <%= articleList[i].name %>
+        </div>
+        <% } %>
+    </div>
+  </body>
+</html>

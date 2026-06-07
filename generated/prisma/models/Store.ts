@@ -60,6 +60,7 @@ export type StoreCountAggregateOutputType = {
   price_cents: number
   producer: number
   amount: number
+  categories: number
   _all: number
 }
 
@@ -98,6 +99,7 @@ export type StoreCountAggregateInputType = {
   price_cents?: true
   producer?: true
   amount?: true
+  categories?: true
   _all?: true
 }
 
@@ -193,6 +195,7 @@ export type StoreGroupByOutputType = {
   price_cents: number
   producer: string
   amount: number
+  categories: string[]
   _count: StoreCountAggregateOutputType | null
   _avg: StoreAvgAggregateOutputType | null
   _sum: StoreSumAggregateOutputType | null
@@ -224,6 +227,7 @@ export type StoreWhereInput = {
   price_cents?: Prisma.IntFilter<"Store"> | number
   producer?: Prisma.StringFilter<"Store"> | string
   amount?: Prisma.IntFilter<"Store"> | number
+  categories?: Prisma.StringNullableListFilter<"Store">
   reviews?: Prisma.ReviewListRelationFilter
 }
 
@@ -233,6 +237,7 @@ export type StoreOrderByWithRelationInput = {
   price_cents?: Prisma.SortOrder
   producer?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  categories?: Prisma.SortOrder
   reviews?: Prisma.ReviewOrderByRelationAggregateInput
 }
 
@@ -245,6 +250,7 @@ export type StoreWhereUniqueInput = Prisma.AtLeast<{
   price_cents?: Prisma.IntFilter<"Store"> | number
   producer?: Prisma.StringFilter<"Store"> | string
   amount?: Prisma.IntFilter<"Store"> | number
+  categories?: Prisma.StringNullableListFilter<"Store">
   reviews?: Prisma.ReviewListRelationFilter
 }, "id">
 
@@ -254,6 +260,7 @@ export type StoreOrderByWithAggregationInput = {
   price_cents?: Prisma.SortOrder
   producer?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  categories?: Prisma.SortOrder
   _count?: Prisma.StoreCountOrderByAggregateInput
   _avg?: Prisma.StoreAvgOrderByAggregateInput
   _max?: Prisma.StoreMaxOrderByAggregateInput
@@ -270,6 +277,7 @@ export type StoreScalarWhereWithAggregatesInput = {
   price_cents?: Prisma.IntWithAggregatesFilter<"Store"> | number
   producer?: Prisma.StringWithAggregatesFilter<"Store"> | string
   amount?: Prisma.IntWithAggregatesFilter<"Store"> | number
+  categories?: Prisma.StringNullableListFilter<"Store">
 }
 
 export type StoreCreateInput = {
@@ -277,6 +285,7 @@ export type StoreCreateInput = {
   price_cents: number
   producer: string
   amount: number
+  categories?: Prisma.StoreCreatecategoriesInput | string[]
   reviews?: Prisma.ReviewCreateNestedManyWithoutItemReviewdInput
 }
 
@@ -286,6 +295,7 @@ export type StoreUncheckedCreateInput = {
   price_cents: number
   producer: string
   amount: number
+  categories?: Prisma.StoreCreatecategoriesInput | string[]
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutItemReviewdInput
 }
 
@@ -294,6 +304,7 @@ export type StoreUpdateInput = {
   price_cents?: Prisma.IntFieldUpdateOperationsInput | number
   producer?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.IntFieldUpdateOperationsInput | number
+  categories?: Prisma.StoreUpdatecategoriesInput | string[]
   reviews?: Prisma.ReviewUpdateManyWithoutItemReviewdNestedInput
 }
 
@@ -303,6 +314,7 @@ export type StoreUncheckedUpdateInput = {
   price_cents?: Prisma.IntFieldUpdateOperationsInput | number
   producer?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.IntFieldUpdateOperationsInput | number
+  categories?: Prisma.StoreUpdatecategoriesInput | string[]
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutItemReviewdNestedInput
 }
 
@@ -312,6 +324,7 @@ export type StoreCreateManyInput = {
   price_cents: number
   producer: string
   amount: number
+  categories?: Prisma.StoreCreatecategoriesInput | string[]
 }
 
 export type StoreUpdateManyMutationInput = {
@@ -319,6 +332,7 @@ export type StoreUpdateManyMutationInput = {
   price_cents?: Prisma.IntFieldUpdateOperationsInput | number
   producer?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.IntFieldUpdateOperationsInput | number
+  categories?: Prisma.StoreUpdatecategoriesInput | string[]
 }
 
 export type StoreUncheckedUpdateManyInput = {
@@ -327,6 +341,15 @@ export type StoreUncheckedUpdateManyInput = {
   price_cents?: Prisma.IntFieldUpdateOperationsInput | number
   producer?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.IntFieldUpdateOperationsInput | number
+  categories?: Prisma.StoreUpdatecategoriesInput | string[]
+}
+
+export type StringNullableListFilter<$PrismaModel = never> = {
+  equals?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel> | null
+  has?: string | Prisma.StringFieldRefInput<$PrismaModel> | null
+  hasEvery?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
+  hasSome?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
+  isEmpty?: boolean
 }
 
 export type StoreCountOrderByAggregateInput = {
@@ -335,6 +358,7 @@ export type StoreCountOrderByAggregateInput = {
   price_cents?: Prisma.SortOrder
   producer?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  categories?: Prisma.SortOrder
 }
 
 export type StoreAvgOrderByAggregateInput = {
@@ -370,6 +394,10 @@ export type StoreScalarRelationFilter = {
   isNot?: Prisma.StoreWhereInput
 }
 
+export type StoreCreatecategoriesInput = {
+  set: string[]
+}
+
 export type StringFieldUpdateOperationsInput = {
   set?: string
 }
@@ -380,6 +408,11 @@ export type IntFieldUpdateOperationsInput = {
   decrement?: number
   multiply?: number
   divide?: number
+}
+
+export type StoreUpdatecategoriesInput = {
+  set?: string[]
+  push?: string | string[]
 }
 
 export type StoreCreateNestedOneWithoutReviewsInput = {
@@ -401,6 +434,7 @@ export type StoreCreateWithoutReviewsInput = {
   price_cents: number
   producer: string
   amount: number
+  categories?: Prisma.StoreCreatecategoriesInput | string[]
 }
 
 export type StoreUncheckedCreateWithoutReviewsInput = {
@@ -409,6 +443,7 @@ export type StoreUncheckedCreateWithoutReviewsInput = {
   price_cents: number
   producer: string
   amount: number
+  categories?: Prisma.StoreCreatecategoriesInput | string[]
 }
 
 export type StoreCreateOrConnectWithoutReviewsInput = {
@@ -432,6 +467,7 @@ export type StoreUpdateWithoutReviewsInput = {
   price_cents?: Prisma.IntFieldUpdateOperationsInput | number
   producer?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.IntFieldUpdateOperationsInput | number
+  categories?: Prisma.StoreUpdatecategoriesInput | string[]
 }
 
 export type StoreUncheckedUpdateWithoutReviewsInput = {
@@ -440,6 +476,7 @@ export type StoreUncheckedUpdateWithoutReviewsInput = {
   price_cents?: Prisma.IntFieldUpdateOperationsInput | number
   producer?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.IntFieldUpdateOperationsInput | number
+  categories?: Prisma.StoreUpdatecategoriesInput | string[]
 }
 
 
@@ -479,6 +516,7 @@ export type StoreSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   price_cents?: boolean
   producer?: boolean
   amount?: boolean
+  categories?: boolean
   reviews?: boolean | Prisma.Store$reviewsArgs<ExtArgs>
   _count?: boolean | Prisma.StoreCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["store"]>
@@ -489,6 +527,7 @@ export type StoreSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   price_cents?: boolean
   producer?: boolean
   amount?: boolean
+  categories?: boolean
 }, ExtArgs["result"]["store"]>
 
 export type StoreSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -497,6 +536,7 @@ export type StoreSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   price_cents?: boolean
   producer?: boolean
   amount?: boolean
+  categories?: boolean
 }, ExtArgs["result"]["store"]>
 
 export type StoreSelectScalar = {
@@ -505,9 +545,10 @@ export type StoreSelectScalar = {
   price_cents?: boolean
   producer?: boolean
   amount?: boolean
+  categories?: boolean
 }
 
-export type StoreOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "price_cents" | "producer" | "amount", ExtArgs["result"]["store"]>
+export type StoreOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "price_cents" | "producer" | "amount" | "categories", ExtArgs["result"]["store"]>
 export type StoreInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   reviews?: boolean | Prisma.Store$reviewsArgs<ExtArgs>
   _count?: boolean | Prisma.StoreCountOutputTypeDefaultArgs<ExtArgs>
@@ -526,6 +567,7 @@ export type $StorePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     price_cents: number
     producer: string
     amount: number
+    categories: string[]
   }, ExtArgs["result"]["store"]>
   composites: {}
 }
@@ -955,6 +997,7 @@ export interface StoreFieldRefs {
   readonly price_cents: Prisma.FieldRef<"Store", 'Int'>
   readonly producer: Prisma.FieldRef<"Store", 'String'>
   readonly amount: Prisma.FieldRef<"Store", 'Int'>
+  readonly categories: Prisma.FieldRef<"Store", 'String[]'>
 }
     
 
@@ -1189,6 +1232,7 @@ export type StoreCreateManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
    * The data used to create many Stores.
    */
   data: Prisma.StoreCreateManyInput | Prisma.StoreCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -1207,6 +1251,7 @@ export type StoreCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extension
    * The data used to create many Stores.
    */
   data: Prisma.StoreCreateManyInput | Prisma.StoreCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**

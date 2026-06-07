@@ -9,7 +9,7 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
 }
 
 model Store {
@@ -18,8 +18,10 @@ model Store {
   price_cents Int 
   producer String 
   amount Int
-  categories Json
+  categories String[]
   reviews Review[]
+
+
 }
 
 model Review{

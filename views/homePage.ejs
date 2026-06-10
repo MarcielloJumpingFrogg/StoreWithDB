@@ -1,24 +1,27 @@
 <!DOCTYPE html>
 <%- include("./partials/head.ejs", {title: title}) %>
-<html lang="en">
+  <html lang="en">
+
   <body>
     <%- include("./partials/navBar.ejs") %>
-    <h1>Home Page</h1>
-    <div class="articles">
-      <% articleList.forEach((article) => {%>
-        <div class="item">
-          <% console.log("Inside Homepage.ejs, ArticleList:", articleList)%>
-          <%= article.name %>
-          <i><%= article.price_cents %>$</i>
-          <b><i>
-              Producer: <%= article.producer%>
-              <br>
+      <h1>Home Page</h1>
+      <div class="articles">
+        <% articleList.forEach((article)=> {%>
+          <div class="item">
+            <%= article.name %>
+              <i>
+                <%= article.price_cents %>$
+              </i>
+              <b><i>
+                  Producer: <%= article.producer%>
+                    <br>
 
-              Amount: <%= article.amount%>
-            </i></b>
-          
-        </div>
-        <% }) %>
-    </div>
+                    Amount: <%= article.amount%>
+                </i></b>
+
+          </div>
+          <% }) %>
+      </div>
   </body>
-</html>
+
+  </html>

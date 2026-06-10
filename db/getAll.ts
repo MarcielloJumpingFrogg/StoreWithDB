@@ -1,30 +1,36 @@
 import { prisma } from "../lib/prisma";
 import type { itemInStore } from "../custom";
+import { fileURLToPath } from "url";
 
+let __main__ = false
+
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
+  __main__ = true
+  getAll();
+}
 
 async function getAll() {
   const result: Array<itemInStore> = [];
-  let error: boolean = false
+  let error
+
   try {
     const res = await prisma.store.findMany();
     res.forEach(element => {
       result.push(element)
     });
-  } catch {
-    error = true;
+  } catch (e) {
+    error = {
+      code: 500,
+      message: "Internal server error"
+    };
   }
-  finally {
-    prisma.$disconnect();
-  }
-  if (error) {
-    return error
-  }
-  else {
-    return result;
 
+  prisma.$disconnect();
+  if (__main__) {
+    console.log(result)
   }
+  return { result, error }
 }
 
 export { getAll };
 
-getAll();

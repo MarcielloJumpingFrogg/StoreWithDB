@@ -1,29 +1,28 @@
 import { prisma } from "../lib/prisma";
+import type { itemInStore } from "../custom";
 
-async function main() {
-  const result: Array<object> = [];
-  try {
-    result.push(await prisma.store.findMany());
-    console.log(result);
-  } catch {
-    result.push({ name: "Error 500" });
-  }
-  return result;
-}
 
 async function getAll() {
-  let res = [];
-  res.push(
-    main()
-      .then(async () => {
-        await prisma.$disconnect();
-      })
-      .catch(async (e) => {
-        console.error(e);
-        await prisma.$disconnect();
-      }),
-  );
-  return res;
+  const result: Array<itemInStore> = [];
+  let error: boolean = false
+  try {
+    const res = await prisma.store.findMany();
+    res.forEach(element => {
+      result.push(element)
+    });
+  } catch {
+    error = true;
+  }
+  finally {
+    prisma.$disconnect();
+  }
+  if (error) {
+    return error
+  }
+  else {
+    return result;
+
+  }
 }
 
 export { getAll };

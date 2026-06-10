@@ -5,11 +5,20 @@
     <%- include("./partials/navBar.ejs") %>
     <h1>Home Page</h1>
     <div class="articles">
-      <% for(let i = 0; i < articleList.length; i++) { %>
+      <% articleList.forEach((article) => {%>
         <div class="item">
-          <%= articleList[i].name %>
+          <% console.log("Inside Homepage.ejs, ArticleList:", articleList)%>
+          <%= article.name %>
+          <i><%= article.price_cents %>$</i>
+          <b><i>
+              Producer: <%= article.producer%>
+              <br>
+
+              Amount: <%= article.amount%>
+            </i></b>
+          
         </div>
-        <% } %>
+        <% }) %>
     </div>
   </body>
 </html>

@@ -10,7 +10,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 routes(app);
 
-console.log("ENV: ", process.env.ENVIRONMENT);
+console.log("ENV: ", process.env.NODE_ENV);
 app.use(express.json());
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));

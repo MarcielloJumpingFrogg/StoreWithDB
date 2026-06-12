@@ -31,15 +31,18 @@ async function main() {
       },
     },
   ];
+  const results = []
   for (let i = 0; i < items.length; i++) {
     const item = items[i];
-    const result = await prisma.store.create({ data: item });
-    console.log(result);
+    const createdData = await prisma.store.create({ data: item });
+    results.push(createdData)
+    console.log(createdData);
   }
+  return results
 }
 
 async function initialize() {
-  main()
+  const result = main()
     .then(async () => {
       await prisma.$disconnect();
     })
@@ -47,6 +50,7 @@ async function initialize() {
       console.error(e);
       await prisma.$disconnect();
     });
+  return result
 }
 
 initialize();

@@ -4,15 +4,12 @@
   "description": "This is the second attempt using prisma",
   "main": "index.js",
   "scripts": {
-    "test": "jest --watch --coverage",
-      "nodetest": "node --experimental-vm-modules ./node_modules/.bin/jest",
+    "test": "vitest --watch",
+    "testCoverage": "vitest --watch --coverage",
     "dev": "tsx --watch ./app.ts",
     "dbgetall": "tsx ./db/getAll.ts",
     "dbdropall": "tsx ./db/dropAll.ts",
     "dbInitialize": "tsx ./db/initialize.ts"
-  },
-  "jest": {
-    "transform":{}
   },
   "repository": {
     "type": "git",
@@ -35,19 +32,16 @@
     "prisma": "^7.8.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.29.7",
     "@prisma/adapter-pg": "^7.8.0",
     "@prisma/client": "^7.8.0",
     "@types/ejs": "^3.1.5",
     "@types/express": "^5.0.6",
-    "@types/jest": "^30.0.0",
     "@types/node": "^25.9.1",
     "@types/pg": "^8.20.0",
-    "babel-jest": "^30.4.1",
-    "jest": "^30.4.2",
+    "@vitest/coverage-v8": "^4.1.8",
     "supertest": "^7.2.2",
-    "ts-jest": "^29.4.11",
     "tsx": "^4.22.4",
-    "typescript": "^6.0.3"
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.8"
   }
 }

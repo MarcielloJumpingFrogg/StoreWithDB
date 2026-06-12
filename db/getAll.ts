@@ -9,16 +9,26 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
   getAll();
 }
 
+function getEnvVariables() {
+  const DATABASE_URL = process.env.DATABASE_URL
+  console.log("DATABASE_URL", DATABASE_URL)
+
+}
+
+
 async function getAll() {
   const result: Array<itemInStore> = [];
   let error
 
   try {
+    console.log("iamtrying")
     const res = await prisma.store.findMany();
+    console.log("did i find something?", res)
     res.forEach(element => {
       result.push(element)
     });
   } catch (e) {
+    console.log("i failed")
     error = {
       code: 500,
       message: "Internal server error"
@@ -29,8 +39,9 @@ async function getAll() {
   if (__main__) {
     console.log(result)
   }
+  console.log("GETALLRESULT: ", result)
   return { result, error }
 }
 
-export { getAll };
+export { getAll, getEnvVariables };
 

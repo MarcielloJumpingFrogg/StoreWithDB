@@ -21,14 +21,11 @@ async function getAll() {
   let error
 
   try {
-    console.log("iamtrying")
     const res = await prisma.store.findMany();
-    console.log("did i find something?", res)
     res.forEach(element => {
       result.push(element)
     });
   } catch (e) {
-    console.log("i failed")
     error = {
       code: 500,
       message: "Internal server error"
@@ -39,7 +36,6 @@ async function getAll() {
   if (__main__) {
     console.log(result)
   }
-  console.log("GETALLRESULT: ", result)
   return { result, error }
 }
 

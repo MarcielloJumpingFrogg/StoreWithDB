@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<%- include("./partials/head.ejs", {title: title}) %>
+  <html lang="en">
+
+  <body>
+    <%- include("./partials/navBar.ejs") %>
+      <form action="/new" method="post">
+        <label for="name">Name: </label>
+        <input type="text" name="name" id="name">
+        <label for="price_cents">Price In Cents: </label>
+        <input type="number" name="price_cents" id="price_cents">
+        <label for="producer">Producer</label>
+        <input type="text" name="producer" id="producer">
+        <label for="amount">Amount</label>
+        <input type="number" name="amount" id="amount">
+        <label for="categories">Categories</label>
+        <input type="list" name="categories" id="categories">
+        <button type="submit">Submit</button>
+      </form>
+  </body>
+
+  </html>

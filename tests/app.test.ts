@@ -7,6 +7,7 @@ import { app } from "../app"
 import { dropAll } from "../db/dropAll"
 import { initialize } from "../db/initialize"
 import { getAll, getEnvVariables } from "../db/getAll"
+import { afterEach } from "node:test"
 
 const store = [
   {
@@ -26,22 +27,17 @@ const store = [
   },
 ]
 
-//beforeEach(async () => {
-//  //Clear the Database
-//  await dropAll()
-//  //initialize it 
-//  await initialize()
-//
-//  return async () => {
-//    //vi.unstubAllEnvs();
-//  }
-//
-//})
+beforeEach(async () => {
+  //Clear the Database
+  await dropAll()
+  //initialize it
+  await initialize()
+})
 
-//async function reset() {
-//  await dropAll()
-//  await initialize()
-//}
+afterEach(async () => {
+  vi.unstubAllEnvs();
+})
+
 
 it("should work", async () => {
   await request(app).get('/').expect(200).expect("Content-Type", /html/)

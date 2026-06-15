@@ -8,13 +8,13 @@ import routes from "./src/startup/routes";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-routes(app);
 
-console.log("ENV: ", process.env.NODE_ENV);
 app.use(express.json());
-app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static("public"));
+app.set("view engine", "ejs");
+app.use('/static', express.static('public'));
+
+routes(app);
 
 
 app.listen(PORT, async () => {

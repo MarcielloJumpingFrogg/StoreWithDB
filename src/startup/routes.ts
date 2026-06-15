@@ -1,7 +1,10 @@
 import { homePage } from "../routes/homePage";
+import { newRoute } from "../routes/new"
 
 export default async function(app: any) {
   app.use("/", homePage);
+
+  app.use("/new", newRoute);
 
   app.use("{*splat}", (req, res) => {
     console.error("404 page not found")

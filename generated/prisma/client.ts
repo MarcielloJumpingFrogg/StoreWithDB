@@ -47,6 +47,11 @@ export { Prisma }
  */
 export type Store = Prisma.StoreModel
 /**
+ * Model Categories
+ * 
+ */
+export type Categories = Prisma.CategoriesModel
+/**
  * Model Review
  * 
  */

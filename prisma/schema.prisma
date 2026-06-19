@@ -13,20 +13,18 @@ datasource db {
 }
 
 model Store {
-  id          Int        @id @default(autoincrement())
+  id          Int      @id @default(autoincrement())
   name        String
   price_cents Int
   producer    String
   amount      Int
-  categories  Categories @relation(fields: [categoryId], references: [id])
-  categoryId  Int
+  categories  String[]
   reviews     Review[]
 }
 
 model Categories {
-  id           Int     @id @default(autoincrement())
-  categoryName String
-  stores       Store[]
+  id           Int    @id @default(autoincrement())
+  categoryName String @unique
 }
 
 model Review {

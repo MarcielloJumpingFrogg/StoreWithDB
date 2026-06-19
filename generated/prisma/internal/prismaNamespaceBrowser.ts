@@ -78,7 +78,7 @@ export const StoreScalarFieldEnum = {
   price_cents: 'price_cents',
   producer: 'producer',
   amount: 'amount',
-  categoryId: 'categoryId'
+  categories: 'categories'
 } as const
 
 export type StoreScalarFieldEnum = (typeof StoreScalarFieldEnum)[keyof typeof StoreScalarFieldEnum]

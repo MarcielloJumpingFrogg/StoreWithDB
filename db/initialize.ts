@@ -1,4 +1,7 @@
+import { check } from "express-validator";
 import { prisma } from "../lib/prisma";
+import { getAllCategories } from "./getAllCategories";
+import "dotenv/config"
 
 async function main() {
   const items = [
@@ -7,7 +10,7 @@ async function main() {
       price_cents: 10,
       producer: "generic",
       amount: 120,
-      categories: ["silent", "generic", "rx cherry"],
+      categories: ["silent", "generic", "MX cherry"],
       reviews: {
         create: {
           user: "Paolo",
@@ -20,7 +23,12 @@ async function main() {
       name: "Kahil clicky green switches",
       price_cents: 20,
       producer: "Kahil",
-      categories: ["clicky", "kahil", "premium", "rx cherry"],
+      categories: [
+        "MX cherry",
+        "clicky",
+        "kahil",
+        "premium"
+      ],
       amount: 80,
       reviews: {
         create: {
@@ -31,26 +39,87 @@ async function main() {
       },
     },
   ];
-  const results = []
-  for (let i = 0; i < items.length; i++) {
-    const item = items[i];
-    const createdData = await prisma.store.create({ data: item });
-    results.push(createdData)
-    console.log(createdData);
+
+  const result = []
+  let error
+  try {
+    for (let i = 0; i < items.length; i++) {
+      const item = items[i];
+      const createdData = await prisma.store.create({ data: item });
+
+      result.push(createdData)
+      console.log(createdData);
+    }
   }
-  return results
+  catch (e) {
+    console.error(e)
+    error = {
+      code: 500,
+      message: 'Error initializing the store'
+    }
+  }
+  return { result, error }
+}
+
+async function initializeCategories() {
+  const categoryList = [
+    {
+      categoryName: "silent"
+    },
+    {
+      categoryName: "generic"
+    },
+    {
+      categoryName: "MX cherry"
+    },
+    {
+      categoryName: "clicky"
+    },
+    {
+      categoryName: "kahil"
+    },
+    {
+      categoryName: "premium"
+    },
+  ]
+
+  let result = []
+  let error
+  try {
+    for (let i = 0; i < categoryList.length; i++) {
+      const checkCategory = await prisma.categories.findMany({ where: { categoryName: categoryList[i].categoryName } })
+      console.log('checkCategory: ', checkCategory.length)
+      if (checkCategory.length == 0) {
+        const createCategory = await prisma.categories.create({ data: categoryList[i] })
+        console.log("Created categories: ", createCategory)
+        result.push(createCategory)
+      }
+    }
+  }
+  catch (e) {
+    console.error(e)
+    error = {
+      code: 500,
+      message: 'Error at initialize categories'
+    }
+  }
+
 }
 
 async function initialize() {
-  const result = main()
+  const createCategories = await initializeCategories()
+  const resultItems = main()
     .then(async () => {
       await prisma.$disconnect();
     })
     .catch(async (e) => {
       console.error(e);
       await prisma.$disconnect();
+      process.exit(1)
     });
-  return result
+  console.log("Successfully created: ", createCategories)
+  console.log('env', process.env.DATABASE_URL)
+  return resultItems
 }
 
 initialize();

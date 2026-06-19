@@ -1,26 +1,26 @@
-import { getAll } from "./getAll"
-import type { itemInStore } from '../custom.d.ts'
+import { prisma } from "../lib/prisma";
 
 async function getAllCategories() {
-  const listOfCategories: Array<string> = []
-  const { result, error } = await getAll()
+  let result;
+  let error;
 
-  if (error) {
-    console.error(error.code, error.message)
-    throw new Error
+  try {
+    result = await prisma.categories.findMany();
+  } catch (e) {
+    error = {
+      code: 500,
+      message: "There has been an internal server error",
+    };
+    console.error(e);
+    console.error(error);
+  } finally {
+    prisma.$disconnect();
   }
 
-  result.forEach((element: itemInStore) => {
-    element.categories.forEach((e: string) => {
-      if (!listOfCategories.includes(e)) {
-        listOfCategories.push(e)
-      }
-    })
-  })
-
-  return listOfCategories
+  console.log(result);
+  return { result, error };
 }
 
-export { getAllCategories }
+export { getAllCategories };
 
 getAllCategories();

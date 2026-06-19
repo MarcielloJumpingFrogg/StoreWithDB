@@ -192,23 +192,20 @@ export type CategoriesWhereInput = {
   NOT?: Prisma.CategoriesWhereInput | Prisma.CategoriesWhereInput[]
   id?: Prisma.IntFilter<"Categories"> | number
   categoryName?: Prisma.StringFilter<"Categories"> | string
-  stores?: Prisma.StoreListRelationFilter
 }
 
 export type CategoriesOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   categoryName?: Prisma.SortOrder
-  stores?: Prisma.StoreOrderByRelationAggregateInput
 }
 
 export type CategoriesWhereUniqueInput = Prisma.AtLeast<{
   id?: number
+  categoryName?: string
   AND?: Prisma.CategoriesWhereInput | Prisma.CategoriesWhereInput[]
   OR?: Prisma.CategoriesWhereInput[]
   NOT?: Prisma.CategoriesWhereInput | Prisma.CategoriesWhereInput[]
-  categoryName?: Prisma.StringFilter<"Categories"> | string
-  stores?: Prisma.StoreListRelationFilter
-}, "id">
+}, "id" | "categoryName">
 
 export type CategoriesOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -230,24 +227,20 @@ export type CategoriesScalarWhereWithAggregatesInput = {
 
 export type CategoriesCreateInput = {
   categoryName: string
-  stores?: Prisma.StoreCreateNestedManyWithoutCategoriesInput
 }
 
 export type CategoriesUncheckedCreateInput = {
   id?: number
   categoryName: string
-  stores?: Prisma.StoreUncheckedCreateNestedManyWithoutCategoriesInput
 }
 
 export type CategoriesUpdateInput = {
   categoryName?: Prisma.StringFieldUpdateOperationsInput | string
-  stores?: Prisma.StoreUpdateManyWithoutCategoriesNestedInput
 }
 
 export type CategoriesUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   categoryName?: Prisma.StringFieldUpdateOperationsInput | string
-  stores?: Prisma.StoreUncheckedUpdateManyWithoutCategoriesNestedInput
 }
 
 export type CategoriesCreateManyInput = {
@@ -262,11 +255,6 @@ export type CategoriesUpdateManyMutationInput = {
 export type CategoriesUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   categoryName?: Prisma.StringFieldUpdateOperationsInput | string
-}
-
-export type CategoriesScalarRelationFilter = {
-  is?: Prisma.CategoriesWhereInput
-  isNot?: Prisma.CategoriesWhereInput
 }
 
 export type CategoriesCountOrderByAggregateInput = {
@@ -292,90 +280,11 @@ export type CategoriesSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
 }
 
-export type CategoriesCreateNestedOneWithoutStoresInput = {
-  create?: Prisma.XOR<Prisma.CategoriesCreateWithoutStoresInput, Prisma.CategoriesUncheckedCreateWithoutStoresInput>
-  connectOrCreate?: Prisma.CategoriesCreateOrConnectWithoutStoresInput
-  connect?: Prisma.CategoriesWhereUniqueInput
-}
-
-export type CategoriesUpdateOneRequiredWithoutStoresNestedInput = {
-  create?: Prisma.XOR<Prisma.CategoriesCreateWithoutStoresInput, Prisma.CategoriesUncheckedCreateWithoutStoresInput>
-  connectOrCreate?: Prisma.CategoriesCreateOrConnectWithoutStoresInput
-  upsert?: Prisma.CategoriesUpsertWithoutStoresInput
-  connect?: Prisma.CategoriesWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.CategoriesUpdateToOneWithWhereWithoutStoresInput, Prisma.CategoriesUpdateWithoutStoresInput>, Prisma.CategoriesUncheckedUpdateWithoutStoresInput>
-}
-
-export type CategoriesCreateWithoutStoresInput = {
-  categoryName: string
-}
-
-export type CategoriesUncheckedCreateWithoutStoresInput = {
-  id?: number
-  categoryName: string
-}
-
-export type CategoriesCreateOrConnectWithoutStoresInput = {
-  where: Prisma.CategoriesWhereUniqueInput
-  create: Prisma.XOR<Prisma.CategoriesCreateWithoutStoresInput, Prisma.CategoriesUncheckedCreateWithoutStoresInput>
-}
-
-export type CategoriesUpsertWithoutStoresInput = {
-  update: Prisma.XOR<Prisma.CategoriesUpdateWithoutStoresInput, Prisma.CategoriesUncheckedUpdateWithoutStoresInput>
-  create: Prisma.XOR<Prisma.CategoriesCreateWithoutStoresInput, Prisma.CategoriesUncheckedCreateWithoutStoresInput>
-  where?: Prisma.CategoriesWhereInput
-}
-
-export type CategoriesUpdateToOneWithWhereWithoutStoresInput = {
-  where?: Prisma.CategoriesWhereInput
-  data: Prisma.XOR<Prisma.CategoriesUpdateWithoutStoresInput, Prisma.CategoriesUncheckedUpdateWithoutStoresInput>
-}
-
-export type CategoriesUpdateWithoutStoresInput = {
-  categoryName?: Prisma.StringFieldUpdateOperationsInput | string
-}
-
-export type CategoriesUncheckedUpdateWithoutStoresInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  categoryName?: Prisma.StringFieldUpdateOperationsInput | string
-}
-
-
-/**
- * Count Type CategoriesCountOutputType
- */
-
-export type CategoriesCountOutputType = {
-  stores: number
-}
-
-export type CategoriesCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  stores?: boolean | CategoriesCountOutputTypeCountStoresArgs
-}
-
-/**
- * CategoriesCountOutputType without action
- */
-export type CategoriesCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the CategoriesCountOutputType
-   */
-  select?: Prisma.CategoriesCountOutputTypeSelect<ExtArgs> | null
-}
-
-/**
- * CategoriesCountOutputType without action
- */
-export type CategoriesCountOutputTypeCountStoresArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.StoreWhereInput
-}
 
 
 export type CategoriesSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   categoryName?: boolean
-  stores?: boolean | Prisma.Categories$storesArgs<ExtArgs>
-  _count?: boolean | Prisma.CategoriesCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["categories"]>
 
 export type CategoriesSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -394,18 +303,10 @@ export type CategoriesSelectScalar = {
 }
 
 export type CategoriesOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "categoryName", ExtArgs["result"]["categories"]>
-export type CategoriesInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  stores?: boolean | Prisma.Categories$storesArgs<ExtArgs>
-  _count?: boolean | Prisma.CategoriesCountOutputTypeDefaultArgs<ExtArgs>
-}
-export type CategoriesIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
-export type CategoriesIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
 
 export type $CategoriesPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Categories"
-  objects: {
-    stores: Prisma.$StorePayload<ExtArgs>[]
-  }
+  objects: {}
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     categoryName: string
@@ -803,7 +704,6 @@ readonly fields: CategoriesFieldRefs;
  */
 export interface Prisma__CategoriesClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  stores<T extends Prisma.Categories$storesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Categories$storesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StorePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -852,10 +752,6 @@ export type CategoriesFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.In
    */
   omit?: Prisma.CategoriesOmit<ExtArgs> | null
   /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.CategoriesInclude<ExtArgs> | null
-  /**
    * Filter, which Categories to fetch.
    */
   where: Prisma.CategoriesWhereUniqueInput
@@ -874,10 +770,6 @@ export type CategoriesFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Extens
    */
   omit?: Prisma.CategoriesOmit<ExtArgs> | null
   /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.CategoriesInclude<ExtArgs> | null
-  /**
    * Filter, which Categories to fetch.
    */
   where: Prisma.CategoriesWhereUniqueInput
@@ -895,10 +787,6 @@ export type CategoriesFindFirstArgs<ExtArgs extends runtime.Types.Extensions.Int
    * Omit specific fields from the Categories
    */
   omit?: Prisma.CategoriesOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.CategoriesInclude<ExtArgs> | null
   /**
    * Filter, which Categories to fetch.
    */
@@ -948,10 +836,6 @@ export type CategoriesFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extensi
    */
   omit?: Prisma.CategoriesOmit<ExtArgs> | null
   /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.CategoriesInclude<ExtArgs> | null
-  /**
    * Filter, which Categories to fetch.
    */
   where?: Prisma.CategoriesWhereInput
@@ -999,10 +883,6 @@ export type CategoriesFindManyArgs<ExtArgs extends runtime.Types.Extensions.Inte
    * Omit specific fields from the Categories
    */
   omit?: Prisma.CategoriesOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.CategoriesInclude<ExtArgs> | null
   /**
    * Filter, which Categories to fetch.
    */
@@ -1052,10 +932,6 @@ export type CategoriesCreateArgs<ExtArgs extends runtime.Types.Extensions.Intern
    */
   omit?: Prisma.CategoriesOmit<ExtArgs> | null
   /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.CategoriesInclude<ExtArgs> | null
-  /**
    * The data needed to create a Categories.
    */
   data: Prisma.XOR<Prisma.CategoriesCreateInput, Prisma.CategoriesUncheckedCreateInput>
@@ -1103,10 +979,6 @@ export type CategoriesUpdateArgs<ExtArgs extends runtime.Types.Extensions.Intern
    * Omit specific fields from the Categories
    */
   omit?: Prisma.CategoriesOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.CategoriesInclude<ExtArgs> | null
   /**
    * The data needed to update a Categories.
    */
@@ -1174,10 +1046,6 @@ export type CategoriesUpsertArgs<ExtArgs extends runtime.Types.Extensions.Intern
    */
   omit?: Prisma.CategoriesOmit<ExtArgs> | null
   /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.CategoriesInclude<ExtArgs> | null
-  /**
    * The filter to search for the Categories to update in case it exists.
    */
   where: Prisma.CategoriesWhereUniqueInput
@@ -1204,10 +1072,6 @@ export type CategoriesDeleteArgs<ExtArgs extends runtime.Types.Extensions.Intern
    */
   omit?: Prisma.CategoriesOmit<ExtArgs> | null
   /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.CategoriesInclude<ExtArgs> | null
-  /**
    * Filter which Categories to delete.
    */
   where: Prisma.CategoriesWhereUniqueInput
@@ -1228,30 +1092,6 @@ export type CategoriesDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.In
 }
 
 /**
- * Categories.stores
- */
-export type Categories$storesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Store
-   */
-  select?: Prisma.StoreSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Store
-   */
-  omit?: Prisma.StoreOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.StoreInclude<ExtArgs> | null
-  where?: Prisma.StoreWhereInput
-  orderBy?: Prisma.StoreOrderByWithRelationInput | Prisma.StoreOrderByWithRelationInput[]
-  cursor?: Prisma.StoreWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.StoreScalarFieldEnum | Prisma.StoreScalarFieldEnum[]
-}
-
-/**
  * Categories without action
  */
 export type CategoriesDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1263,8 +1103,4 @@ export type CategoriesDefaultArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * Omit specific fields from the Categories
    */
   omit?: Prisma.CategoriesOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.CategoriesInclude<ExtArgs> | null
 }

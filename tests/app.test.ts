@@ -6,7 +6,7 @@ import { app } from "../app"
 
 import { dropAll } from "../db/dropAll"
 import { initialize } from "../db/initialize"
-import { getAll, getEnvVariables } from "../db/getAll"
+import { getAll } from "../db/getAll"
 import { afterEach } from "node:test"
 
 const store = [
@@ -15,27 +15,53 @@ const store = [
     price_cents: 10,
     producer: "generic",
     amount: 120,
-    categories: ["silent", "generic", "rx cherry"],
+    categories: ["silent", "generic", "MX cherry"],
   },
   {
 
     name: "Kahil clicky green switches",
     price_cents: 20,
     producer: "Kahil",
-    categories: ["clicky", "kahil", "premium", "rx cherry"],
+    categories: ["MX cherry", "clicky", "kahil", "premium"],
     amount: 80,
+  },
+]
+
+const categories = [
+  {
+    categoryName: "silent"
+  },
+  {
+    categoryName: "generic"
+  },
+  {
+    categoryName: "MX cherry"
+  },
+  {
+    categoryName: "clicky"
+  },
+  {
+    categoryName: "kahil"
+  },
+  {
+    categoryName: "premium"
   },
 ]
 
 beforeEach(async () => {
   //Clear the Database
+  // const { result, error } = await getAll()
+  // console.log('here are the results: ', result.length, error)
+  // if (result.length != 0 && error != undefined) {
   await dropAll()
   //initialize it
+  //}
   await initialize()
 })
 
 afterEach(async () => {
   vi.unstubAllEnvs();
+  refreshPrisma();
 })
 
 
@@ -76,5 +102,8 @@ describe("Testing DB", () => {
     const { result, error } = await getAll();
     expect(result).toEqual([])
     expect(error).toMatchObject({ code: 500 })
+    vi.unstubAllEnvs()
+    refreshPrisma()
   })
+
 })
